@@ -1,0 +1,23 @@
+{
+  "name": "backendcrudfood",
+  "version": "1.0.0",
+  "description": "El backend de el proyecto Crud Food.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "keywords": [
+    "rutas",
+    "controlador",
+    "BD mongoBD",
+    "middlewares"
+  ],
+  "author": "Daniela Cardozo",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
+  }
+}
