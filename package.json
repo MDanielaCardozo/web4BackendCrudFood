@@ -4,7 +4,8 @@
   "description": "El backend de el proyecto Crud Food.",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "dev" : "node --env-file .env --watch index"
   },
   "keywords": [
     "rutas",
