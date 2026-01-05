@@ -1,10 +1,8 @@
 import { Router } from "express";
+import { prueba } from "../controllers/productos.controllers.js";
 
 const router = Router();
 
-router.route('/').get((req, res) => {
-    console.log('desde el controlador de prueba');
-    res.send('Prueba desde el controlador')
-})
+router.route('/').get(prueba)
 
 export default router;
