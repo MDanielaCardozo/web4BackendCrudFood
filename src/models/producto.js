@@ -39,7 +39,19 @@ const productoSchema = new Schema ({
     },
     imagen: {
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator: (valor) => {
+                return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?(\.(jpg|jpeg|png|webp))$/.test(valor)
+            }
+        }
     }
+},
+ {
+    timestamps: true
+ }
+)
 
-})
+const Producto = mongoose.model('producto', productoSchema);
+
+export default Producto;
