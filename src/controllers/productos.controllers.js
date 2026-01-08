@@ -40,7 +40,7 @@ export const listarProductos = async (req, res) => {
 
 export const obtenerProducto = async (req, res) => {
     try {
-        console.log(req.params);
+        console.log(req.params.id);
         const productoBuscado = await Producto.findById(req.params.id);
         if(!productoBuscado) {
             //404 not found
@@ -50,5 +50,31 @@ export const obtenerProducto = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({mensaje: 'Ocurrio un error al listar el producto'})
+    }
+}
+
+export const borrarProductoPorID = async (req, res) => {
+   try {
+        const productoBuscado = await Producto.findByIdAndDelete(req.params.id);
+        if(!productoBuscado) {
+            return res.status(404).json({mensaje: "No se encontro el producto"})
+        }
+        return res.status(200).json({mensaje: "El producto fue eliminado correctamente."})
+   } catch (error) {
+    console.error(error);
+    res.status(500).json({mensaje: "Ocurrio un error, no se pudo eliminar el producto"})
+   }
+}
+
+export const editarProductoPorID = async (req, res) => {
+    try {
+        const productoBuscado = await Producto.findByIdAndUpdate(req.params.id, req.body);
+        if(!productoBuscado) {
+            return res.status(404).json({mensaje: "No se encontro el producto"})
+        }
+        return res.status(200).json({mensaje: "El producto fue editado correctamente"})
+    } catch (error) {
+        console.error(error);
+    res.status(500).json({mensaje: "Ocurrio un error, no se pudo actualizar el producto correctamente."})
     }
 }
