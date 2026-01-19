@@ -78,3 +78,4 @@ export const editarProductoPorID = async (req, res) => {
     res.status(500).json({mensaje: "Ocurrio un error, no se pudo actualizar el producto correctamente."})
     }
 }
+
