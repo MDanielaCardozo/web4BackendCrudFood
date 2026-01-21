@@ -79,3 +79,29 @@ export const editarProductoPorID = async (req, res) => {
     }
 }
 
+export const productosPaginados = async (req, res) => {
+    try {
+        console.log(req.query);
+        //primer parametro que extraemos de query es la pagina
+        const page = req.query.page || 1;
+        //segundo parametro es el limite de producto por pagina
+        const limit = req.query.limit || 10;
+        //tercer parametro nro de salto para omitir los prodcuto cargados previamente en las paginas 
+        const skip = (page - 1) * limit;
+
+        const [productos, cantidadProductos] = await Promise.all([
+            Producto.find().skip(skip).limit(limit),
+            Producto.countDocuments()
+        ]);
+        //status code
+        res.status(200).json({
+            productos,
+            paginaActual: page,
+            cantidadProductos,
+            cantPaginas: Math.ceil(cantidadProductos / limit),
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({mensaje: "Ocurrio un error al listar los productos paginados"})
+    }
+};
